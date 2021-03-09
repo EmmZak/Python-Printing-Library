@@ -9,4 +9,4 @@ d = {
 
 l = [1,2,3,4]
 
-p.warning(d)
+p.info(d)
