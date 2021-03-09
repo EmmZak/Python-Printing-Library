@@ -20,6 +20,13 @@ class Printer:
         for k, v in struct.items():
             print(f'  {self.PURPLE}{k}{self.END} : {self.GREEN}{v}{self.END}')
         print('}')
+    
+    def print_list(self, struct):
+        print(f'{self.GREEN}[{self.END}', end="")
+        for e in struct:
+            print(f' {e}', end="")
+            #print(f' {self.GREEN}{e}{self.END}', end="")
+        print(f'{self.GREEN} ]{self.END}')
 
     def print(self, *args):
         for arg in args:
@@ -28,7 +35,12 @@ class Printer:
     def info(self, *args):
         print(f'{self.BLUE}[INFO]{self.END}: ', end="")
         for arg in args:
-            print(arg, sep="", end="")
+            if isinstance(arg, dict):
+                self.print_dict(arg)
+            elif isinstance(arg, list):
+                self.print_list(arg)
+            else:
+                print(arg, sep="", end="")
         print()
 
     def success(self, *args):

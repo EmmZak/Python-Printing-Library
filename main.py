@@ -7,4 +7,6 @@ d = {
     'elyes': 10
 }
 
-p.print_dict(d)
+l = [1,2,3,4]
+
+p.print_list(l)
