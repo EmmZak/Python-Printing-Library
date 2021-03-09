@@ -1,6 +1,7 @@
 """
 Printing stuff to console
 """
+from datetime import datetime
 
 class Printer:
 
@@ -16,14 +17,16 @@ class Printer:
 
     def __init__(self):
         pass
-
-    def print_dict(self, struct):
+    
+    # private function
+    def __print_dict(self, struct):
         print('{')
         for k, v in struct.items():
             print(f'  {self.PURPLE}{k}{self.END} : {self.GREEN}{v}{self.END}')
         print('}')
     
-    def print_list(self, struct):
+    # private function
+    def __print_list(self, struct):
         print(f'{self.GREEN}[{self.END}', end="")
         for e in struct:
             print(f' {e}', end="")
@@ -31,33 +34,37 @@ class Printer:
         print(f'{self.GREEN} ]{self.END}')
     
     # draws lines to delimit logs
-    def draw_delimiter(self, color, length):
-        print(f'{color}{self.DELIMITER * (length)}{self.END} ', end="")
+    def draw_delimiter(self, color, length, date=None):
+        if date:
+            print(f'{color}___{str(datetime.now())}___{self.END} ', end="")
+        else:
+            print(f'{color}{self.DELIMITER * (length)}{self.END} ', end="")
+        print()
 
     # determines object's type and call corresponding function
     def print_object(self, obj):
         if isinstance(obj, dict):
             print()
-            self.print_dict(obj)
+            self.__print_dict(obj)
         elif isinstance(obj, list):
             print()
-            self.print_list(obj)
+            self.__print_list(obj)
         else:
             print(obj, sep="", end="")
-    
+
     def info(self, *args):
         print(f'{self.BLUE}[INFO]{self.END} ', end="")
-        self.draw_delimiter(self.BLUE, self.LINE)
+        self.draw_delimiter(self.BLUE, self.LINE + 3, date=True)
 
         # printing actual data
         for arg in args:
             self.print_object(arg)
 
-        self.draw_delimiter(self.BLUE, self.LINE+7)
+        self.draw_delimiter(self.BLUE, self.LINE+10)
 
     def success(self, *args):
         print(f'{self.GREEN}[SUCCESS]{self.END} ', end="")
-        self.draw_delimiter(self.GREEN, self.LINE)
+        self.draw_delimiter(self.GREEN, self.LINE, date=True)
 
         # printing actual data
         for arg in args:
@@ -67,7 +74,7 @@ class Printer:
 
     def warning(self, *args):
         print(f'{self.YELLOW}[WARNING]{self.END} ', end="")
-        self.draw_delimiter(self.YELLOW, self.LINE)
+        self.draw_delimiter(self.YELLOW, self.LINE, date=True)
 
         # printing actual data
         for arg in args:
@@ -77,12 +84,10 @@ class Printer:
 
     def error(self, *args):
         print(f'{self.RED}[ERROR]{self.END} ', end="")
-        self.draw_delimiter(self.RED, self.LINE)
+        self.draw_delimiter(self.RED, self.LINE + 2, date=True)
 
         # printing actual data
         for arg in args:
             self.print_object(arg)
 
-        self.draw_delimiter(self.RED, self.LINE)
-#p = Printer()
-#p.info('ok')
+        self.draw_delimiter(self.RED, self.LINE + 10)

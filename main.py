@@ -9,4 +9,7 @@ d = {
 
 l = [1,2,3,4]
 
-p.info(d)
+p.info(l)
+p.success(l)
+p.warning(l)
+p.error(l)
