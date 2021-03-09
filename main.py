@@ -9,4 +9,7 @@ d = {
 
 l = [1,2,3,4]
 
-p.print_list(l)
+p.info(d, l)
+p.warning(d, l)
+p.success(d, l)
+p.error(d, l)
