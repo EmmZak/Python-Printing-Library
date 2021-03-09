@@ -4,6 +4,8 @@ Printing stuff to console
 
 class Printer:
 
+    OTHER = '\033[90m'
+    PURPLE = '\033[95m'
     BLUE = '\033[94m'
     GREEN = '\033[92m'
     RED = '\033[91m'
@@ -12,6 +14,13 @@ class Printer:
 
     def __init__(self):
         pass
+
+    def print_dict(self, struct):
+        print('{')
+        for k, v in struct.items():
+            print(f'  {self.PURPLE}{k}{self.END} : {self.GREEN}{v}{self.END}')
+        print('}')
+
     def print(self, *args):
         for arg in args:
             print(arg)
